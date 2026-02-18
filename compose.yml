@@ -25,6 +25,9 @@ services:
 
   test:
     <<: *dev-base
+    depends_on:
+      build:
+        condition: service_completed_successfully
     command: ["ctest", "--test-dir", "build", "--output-on-failure"]
 
   format:
