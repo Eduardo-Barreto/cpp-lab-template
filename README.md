@@ -3,7 +3,7 @@
 [![C++26](https://img.shields.io/badge/C%2B%2B-26-blue?logo=cplusplus)](https://isocpp.org/)
 [![CMake](https://img.shields.io/badge/CMake-4.2.3-blue?logo=cmake)](https://cmake.org/)
 [![GoogleTest](https://img.shields.io/badge/GoogleTest-1.17.0-blue?logo=google)](https://github.com/google/googletest)
-[![CI](https://img.shields.io/github/actions/workflow/status/Eduardo-Barreto/cpp-lab-template/ci.yml?label=CI&logo=github)](https://github.com/SEU-USUARIO/cpp-lab-template/actions)
+[![CI](https://img.shields.io/github/actions/workflow/status/Eduardo-Barreto/cpp-lab-template/ci.yml?label=CI&logo=github)](https://github.com/Eduardo-Barreto/cpp-lab-template/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 Template de exercícios em C++ com testes automatizados, formatação e linting configurados.
@@ -42,15 +42,9 @@ Cada exercício gera um executável em `build/` com o nome da pasta (ex: `ola-mu
 Os testes usam [GoogleTest](https://github.com/google/googletest) e são baixados automaticamente via FetchContent.
 
 ```bash
-cmake --preset test
-cmake --build build/test
-ctest --test-dir build/test --output-on-failure
+cmake --build build
+ctest --test-dir build --output-on-failure
 ```
-
-Dois tipos de teste:
-
-- **I/O (stdout):** roda o executável como subprocesso e compara a saída esperada.
-- **Unitário:** importa diretamente o `.hpp` do aluno e testa as funções.
 
 ## Code style
 
@@ -60,10 +54,10 @@ O projeto usa [clang-format](https://clang.llvm.org/docs/ClangFormat.html) com b
 
 ```bash
 # verificar
-find src tests -name '*.cpp' -o -name '*.hpp' | xargs clang-format --dry-run --Werror
+cmake --build build --target format-check
 
 # aplicar
-find src tests -name '*.cpp' -o -name '*.hpp' | xargs clang-format -i
+cmake --build build --target format
 ```
 
 ### Linter
@@ -71,8 +65,7 @@ find src tests -name '*.cpp' -o -name '*.hpp' | xargs clang-format -i
 O projeto usa [clang-tidy](https://clang.llvm.org/extra/clang-tidy/) com checks de bugprone, performance e readability.
 
 ```bash
-cmake --preset dev
-find src -name '*.cpp' | xargs clang-tidy -p build
+cmake --build build --target lint
 ```
 
 ## Adicionando exercícios
@@ -91,7 +84,7 @@ tests/XX-modulo/test_nome_exercicio.cpp
 
 3. Rebuild. O CMake descobre tudo automaticamente.
 
-Para exercícios de **I/O**, o teste roda o executável e compara stdout:
+O teste roda o executável e compara stdout:
 
 ```cpp
 #include <gtest/gtest.h>
@@ -100,17 +93,6 @@ Para exercícios de **I/O**, o teste roda o executável e compara stdout:
 TEST(NomeExercicio, CasoBasico) {
     auto result = run("nome-exercicio", "entrada\n");
     EXPECT_EQ(result.stdout_output, "saida esperada\n");
-}
-```
-
-Para exercícios com **função/classe**, o teste importa o `.hpp` diretamente:
-
-```cpp
-#include <gtest/gtest.h>
-#include "XX-modulo/nome-exercicio/arquivo.hpp"
-
-TEST(NomeExercicio, CasoBasico) {
-    EXPECT_EQ(funcao(5), 10);
 }
 ```
 
