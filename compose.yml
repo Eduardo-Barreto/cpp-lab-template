@@ -1,0 +1,43 @@
+x-dev: &dev-base
+  build: .
+  working_dir: /app
+  volumes:
+    - .:/app
+    - build-cache:/app/build
+
+services:
+  dev:
+    <<: *dev-base
+    entrypoint: ["bash"]
+    profiles: ["shell"]
+
+  run:
+    <<: *dev-base
+    stdin_open: true
+    tty: true
+    depends_on:
+      build:
+        condition: service_completed_successfully
+
+  build:
+    <<: *dev-base
+    command: ["cmake", "--build", "build"]
+
+  test:
+    <<: *dev-base
+    command: ["ctest", "--test-dir", "build", "--output-on-failure"]
+
+  format:
+    <<: *dev-base
+    command: ["cmake", "--build", "build", "--target", "format"]
+
+  format-check:
+    <<: *dev-base
+    command: ["cmake", "--build", "build", "--target", "format-check"]
+
+  lint:
+    <<: *dev-base
+    command: ["cmake", "--build", "build", "--target", "lint"]
+
+volumes:
+  build-cache:
