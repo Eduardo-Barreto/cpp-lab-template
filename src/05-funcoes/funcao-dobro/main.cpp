@@ -10,6 +10,13 @@
 #include <iostream>
 using namespace std;
 
+int dobro(int n) {
+    return n * 2;
+}
+
 int main() {
+    int n;
+    cin >> n;
+    cout << dobro(n) << endl;
     return 0;
 }
