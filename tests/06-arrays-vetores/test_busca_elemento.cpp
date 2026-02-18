@@ -17,7 +17,7 @@ std::string toLower(std::string str) {
 TEST(BuscaElemento, Encontrado) {
     auto result = run("busca-elemento", "5\n10\n15\n20\n25\n30\n35\n40\n45\n50\n25\n");
     EXPECT_EQ(result.exit_code, 0);
-    EXPECT_NE(result.stdout_output.find("4"), std::string::npos);
+    EXPECT_NE(result.stdout_output.find('4'), std::string::npos);
 }
 
 TEST(BuscaElemento, NaoEncontrado) {

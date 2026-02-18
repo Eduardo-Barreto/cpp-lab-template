@@ -25,6 +25,6 @@ TEST(ContagemUmADez, ImprimeNumeros) {
 TEST(ContagemUmADez, ContemPrimeiroEUltimo) {
     auto result = run("contagem-um-a-dez");
     EXPECT_EQ(result.exit_code, 0);
-    EXPECT_NE(result.stdout_output.find("1"), std::string::npos);
+    EXPECT_NE(result.stdout_output.find('1'), std::string::npos);
     EXPECT_NE(result.stdout_output.find("10"), std::string::npos);
 }

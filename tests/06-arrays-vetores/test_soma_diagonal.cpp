@@ -13,5 +13,5 @@ TEST(SomaDiagonal, MatrizSimples) {
 TEST(SomaDiagonal, MatrizZeros) {
     auto result = run("soma-diagonal", "0\n0\n0\n0\n0\n0\n0\n0\n0\n");
     EXPECT_EQ(result.exit_code, 0);
-    EXPECT_NE(result.stdout_output.find("0"), std::string::npos);
+    EXPECT_NE(result.stdout_output.find('0'), std::string::npos);
 }

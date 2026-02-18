@@ -13,11 +13,11 @@ TEST(MaiorDeTres, PrimeiroMaior) {
 TEST(MaiorDeTres, SegundoMaior) {
     auto result = run("maior-de-tres", "2\n9\n4\n");
     EXPECT_EQ(result.exit_code, 0);
-    EXPECT_NE(result.stdout_output.find("9"), std::string::npos);
+    EXPECT_NE(result.stdout_output.find('9'), std::string::npos);
 }
 
 TEST(MaiorDeTres, TerceiroMaior) {
     auto result = run("maior-de-tres", "1\n3\n7\n");
     EXPECT_EQ(result.exit_code, 0);
-    EXPECT_NE(result.stdout_output.find("7"), std::string::npos);
+    EXPECT_NE(result.stdout_output.find('7'), std::string::npos);
 }

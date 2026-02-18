@@ -9,6 +9,6 @@ TEST(ClassePessoa, ImprimeDuasPessoas) {
     EXPECT_EQ(result.exit_code, 0);
     EXPECT_FALSE(result.stdout_output.empty());
 
-    auto first = result.stdout_output.find("\n");
+    auto first = result.stdout_output.find('\n');
     EXPECT_NE(first, std::string::npos);
 }

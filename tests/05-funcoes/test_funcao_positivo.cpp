@@ -21,7 +21,7 @@ TEST(FuncaoPositivo, NumeroPositivo) {
     EXPECT_TRUE(
         output.find("true") != std::string::npos || output.find("verdadeir") != std::string::npos ||
         output.find("positivo") != std::string::npos || output.find("sim") != std::string::npos ||
-        output.find("1") != std::string::npos
+        output.find('1') != std::string::npos
     );
 }
 
@@ -32,7 +32,7 @@ TEST(FuncaoPositivo, NumeroNegativo) {
     EXPECT_TRUE(
         output.find("false") != std::string::npos || output.find("falso") != std::string::npos ||
         output.find("negativo") != std::string::npos || output.find("nao") != std::string::npos ||
-        output.find("0") != std::string::npos
+        output.find('0') != std::string::npos
     );
 }
 
@@ -42,6 +42,6 @@ TEST(FuncaoPositivo, Zero) {
     auto output = toLower(result.stdout_output);
     EXPECT_TRUE(
         output.find("false") != std::string::npos || output.find("falso") != std::string::npos ||
-        output.find("nao") != std::string::npos || output.find("0") != std::string::npos
+        output.find("nao") != std::string::npos || output.find('0') != std::string::npos
     );
 }
