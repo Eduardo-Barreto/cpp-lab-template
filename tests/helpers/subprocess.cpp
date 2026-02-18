@@ -1,27 +1,28 @@
 #include "helpers/subprocess.hpp"
 
 #include <array>
-#include <cstdio>
 #include <cstdlib>
-#include <cstring>
+#include <filesystem>
 #include <stdexcept>
 #include <sys/wait.h>
 #include <unistd.h>
 
-static std::string find_binary(const std::string& name) {
+namespace {
+std::filesystem::path find_binary(const std::string& name) {
     const char* env_dir = std::getenv("BINARY_DIR");
-    if (env_dir) {
-        return std::string(env_dir) + "/" + name;
+    if (env_dir != nullptr) {
+        return std::filesystem::path(env_dir) / name;
     }
 #ifdef BINARY_DIR
-    return std::string(BINARY_DIR) + "/" + name;
+    return std::filesystem::path(BINARY_DIR) / name;
 #else
-    return "./" + name;
+    return std::filesystem::path(".") / name;
 #endif
 }
+}  // namespace
 
 ProcessResult run(const std::string& binary_name, const std::string& stdin_input) {
-    std::string binary_path = find_binary(binary_name);
+    const auto binary_path = find_binary(binary_name).string();
 
     int stdin_pipe[2];
     int stdout_pipe[2];
@@ -31,7 +32,7 @@ ProcessResult run(const std::string& binary_name, const std::string& stdin_input
         throw std::runtime_error("pipe() failed");
     }
 
-    pid_t pid = fork();
+    const pid_t pid = fork();
     if (pid < 0) {
         throw std::runtime_error("fork() failed");
     }
@@ -62,9 +63,9 @@ ProcessResult run(const std::string& binary_name, const std::string& stdin_input
     }
     close(stdin_pipe[1]);
 
-    ProcessResult result;
+    ProcessResult          result;
     std::array<char, 4096> buffer{};
-    ssize_t bytes_read;
+    ssize_t                bytes_read;
 
     while ((bytes_read = read(stdout_pipe[0], buffer.data(), buffer.size())) > 0) {
         result.stdout_output.append(buffer.data(), static_cast<size_t>(bytes_read));
