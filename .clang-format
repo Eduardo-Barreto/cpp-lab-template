@@ -1,0 +1,40 @@
+---
+Language: Cpp
+BasedOnStyle: LLVM
+AccessModifierOffset: -4
+AlignAfterOpenBracket: BlockIndent
+AlignConsecutiveBitFields:
+  Enabled: true
+  PadOperators: true
+AlignConsecutiveDeclarations:
+  Enabled: true
+  PadOperators: true
+AlignConsecutiveMacros:
+  Enabled: true
+  PadOperators: true
+AlignEscapedNewlines: Left
+AllowShortBlocksOnASingleLine: Empty
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Inline
+BreakBeforeTernaryOperators: false
+ColumnLimit: 120
+IncludeCategories:
+  - Regex: '^<.*>'
+    Priority: 1
+    SortPriority: 1
+  - Regex: '^".*"'
+    SortPriority: 2
+IncludeIsMainRegex: '$'
+IndentCaseLabels: true
+IndentExternBlock: NoIndent
+IndentPPDirectives: BeforeHash
+IndentWidth: 4
+IndentWrappedFunctionNames: true
+KeepEmptyLinesAtTheStartOfBlocks: false
+PointerAlignment: Left
+SeparateDefinitionBlocks: Always
+SortIncludes: Never
+SpaceInEmptyBlock: true
+SpacesBeforeTrailingComments: 2
+TabWidth: 4
+...
