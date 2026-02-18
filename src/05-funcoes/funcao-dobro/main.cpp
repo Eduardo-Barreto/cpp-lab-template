@@ -14,10 +14,10 @@ namespace {
 int dobro(int num) {
     return num * 2;
 }
-} // namespace
+}  // namespace
 
 int main() {
-      int num;
+    int num;
     cin >> num;
     cout << dobro(num) << '\n';
     return 0;

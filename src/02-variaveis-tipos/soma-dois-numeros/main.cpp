@@ -11,7 +11,7 @@ using namespace std;
 
 int main() {
     const int num1 = 3;
-      const int num2 = 7;
+    const int num2 = 7;
     cout << num1 + num2 << '\n';
     return 0;
 }
