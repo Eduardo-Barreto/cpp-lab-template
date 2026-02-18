@@ -10,6 +10,7 @@ Template de exercícios em C++ com testes automatizados, formatação e linting 
 
 ## Requisitos
 
+- [Docker](https://docs.docker.com/get-docker/) (recomendado) **ou**:
 - [CMake](https://cmake.org/) >= 4.2.3
 - [Ninja](https://ninja-build.org/)
 - Compilador com suporte a C++26 (GCC >= 15, Clang >= 20)
@@ -22,7 +23,22 @@ Template de exercícios em C++ com testes automatizados, formatação e linting 
 - `tests/helpers/`: Utilitário para testes de I/O. Roda o executável do aluno e compara a saída.
 - `.github/workflows/`: CI que roda testes, formatação e linting a cada Pull Request.
 
-## Compilando
+## Docker
+
+Com Docker, não é necessário instalar nenhuma ferramenta localmente. O container já vem com GCC 15, CMake, Ninja, clang-format e clang-tidy.
+
+```bash
+docker compose run --rm build                   # compilar
+docker compose run --rm run ./build/ola-mundo   # compilar + rodar exercício
+docker compose run --rm test                    # testar
+docker compose run --rm format                  # formatar código
+docker compose run --rm format-check            # verificar formatação
+docker compose run --rm lint                    # rodar linter
+```
+
+O `run` compila automaticamente antes de executar. O build dir é mantido em um volume Docker. Não precisa recompilar tudo a cada execução.
+
+## Compilando (local)
 
 ```bash
 cmake --preset dev
