@@ -31,7 +31,7 @@ endif()
 find_program(CLANG_TIDY clang-tidy)
 if(CLANG_TIDY)
     add_custom_target(lint
-        COMMAND ${CLANG_TIDY} -p ${CMAKE_BINARY_DIR} ${ALL_SOURCES}
+        COMMAND ${CLANG_TIDY} -p ${CMAKE_BINARY_DIR} --warnings-as-errors=* ${ALL_SOURCES}
         COMMENT "Running clang-tidy"
     )
 endif()
