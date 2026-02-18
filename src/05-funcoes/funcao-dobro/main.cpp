@@ -10,13 +10,15 @@
 #include <iostream>
 using namespace std;
 
-int dobro(int n) {
-    return n * 2;
+namespace {
+int dobro(int num) {
+    return num * 2;
 }
+} // namespace
 
 int main() {
-    int n;
-    cin >> n;
-    cout << dobro(n) << endl;
+      int num;
+    cin >> num;
+    cout << dobro(num) << '\n';
     return 0;
 }

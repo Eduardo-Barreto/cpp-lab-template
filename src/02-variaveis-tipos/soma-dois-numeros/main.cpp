@@ -10,8 +10,8 @@
 using namespace std;
 
 int main() {
-    int a = 3;
-    int b = 7;
-    cout << a + b << endl;
+    const int num1 = 3;
+      const int num2 = 7;
+    cout << num1 + num2 << '\n';
     return 0;
 }
