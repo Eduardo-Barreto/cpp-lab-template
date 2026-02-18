@@ -6,7 +6,6 @@ Checks:
   -bugprone-reserved-identifier,
   -bugprone-assignment-in-if-condition,
   clang-*,
-  -clang-analyzer-core.FixedAddressDereference,
   -clang-diagnostic-unused-command-line-argument,
   misc-*,
   -misc-include-cleaner,
