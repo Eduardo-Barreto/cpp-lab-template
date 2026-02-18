@@ -112,6 +112,19 @@ TEST(NomeExercicio, CasoBasico) {
 }
 ```
 
+## CI
+
+A cada commit em um Pull Request, o CI roda automaticamente build, testes, formatação e linting. Um bot comenta o resultado na PR.
+
+Build e testes são obrigatórios. Formatação e linting aparecem como dicas, mas não bloqueiam.
+
+| Cenário | Exemplo |
+|---------|---------|
+| Tudo certo | ![Tudo certo](assets/nice.png) |
+| Dica de linter | ![Dica de linter](assets/nice-but-lint.png) |
+| Dica de formatação | ![Dica de formatação](assets/nice-but-format.png) |
+| Teste falhou | ![Teste falhou](assets/not-nice.png) |
+
 ## Contribuindo
 
 1. Crie uma branch a partir de `main`
