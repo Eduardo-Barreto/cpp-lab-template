@@ -30,9 +30,16 @@ endif()
 
 find_program(CLANG_TIDY clang-tidy)
 if(CLANG_TIDY)
+    set(RUN_CLANG_TIDY_SCRIPT ${CMAKE_BINARY_DIR}/run_clang_tidy.sh)
+    configure_file(${CMAKE_SOURCE_DIR}/cmake/run_clang_tidy.sh.in ${RUN_CLANG_TIDY_SCRIPT} @ONLY)
+
     add_custom_target(lint
-        COMMAND ${CLANG_TIDY} -p ${CMAKE_BINARY_DIR} --warnings-as-errors=* ${ALL_SOURCES}
+        COMMAND bash ${RUN_CLANG_TIDY_SCRIPT} ${ALL_SOURCES}
         COMMENT "Running clang-tidy"
+    )
+    add_custom_target(lint-fix
+        COMMAND bash ${RUN_CLANG_TIDY_SCRIPT} --fix ${ALL_SOURCES}
+        COMMENT "Running clang-tidy with fixes"
     )
 endif()
 

@@ -1,0 +1,26 @@
+#!/bin/bash
+
+FIX_FLAG=""
+
+if [[ "$1" == "--fix" ]]; then
+    FIX_FLAG="--fix"
+    shift
+fi
+
+ERRORS=$(
+    {
+        for file in "$@"; do
+            {
+                clang-tidy $FIX_FLAG --use-color --quiet --warnings-as-errors="*" \
+                -p @CMAKE_BINARY_DIR@ "$file" 2>&1
+            } &
+        done
+
+        wait
+    } | grep -Ev 'warnings? generated\.$' | awk '!seen[$0]++'
+)
+
+if [[ -n "$ERRORS" ]]; then
+    echo -e "\n$ERRORS\033[0m"
+    exit 1
+fi
